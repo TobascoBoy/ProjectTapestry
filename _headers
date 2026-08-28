@@ -3,6 +3,8 @@
 
 # Confirmation links carry a single-use auth token in the query string. Keep
 # them out of caches and out of referrer headers sent to any third party.
-/auth/confirm
+# Globbed rather than the exact path: Netlify canonicalises /auth/confirm to
+# /auth/confirm/ with a 301, and the rules must hold on both.
+/auth/*
   Cache-Control: no-store
   Referrer-Policy: no-referrer
