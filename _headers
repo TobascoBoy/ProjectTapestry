@@ -1,2 +1,8 @@
 /.well-known/apple-app-site-association
   Content-Type: application/json
+
+# Confirmation links carry a single-use auth token in the query string. Keep
+# them out of caches and out of referrer headers sent to any third party.
+/auth/confirm
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer

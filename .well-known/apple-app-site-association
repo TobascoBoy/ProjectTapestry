@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "DU7W8ZDN8M.com.LukeHattrup.Swift-test-2",
-        "paths": ["/join/*"]
+        "paths": ["/join/*", "/auth/*"]
       }
     ]
   }
