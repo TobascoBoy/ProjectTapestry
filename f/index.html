@@ -111,11 +111,12 @@
     }
 
     .note {
-      margin-top: 28px;
-      font-size: 12.5px;
-      line-height: 1.6;
-      color: var(--faint);
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
     }
+    .note strong { color: var(--ink); font-weight: 600; }
 
     .wordmark {
       position: fixed;
@@ -142,13 +143,13 @@
 
     <a class="btn" id="primary" href="https://testflight.apple.com/join/SzCFn81z" hidden>Get Tapestry</a>
 
-    <p class="secondary" id="secondary" hidden>
-      Already have Tapestry? <a id="openApp" href="#">Open your invite in the app</a>
+    <p class="note" id="note" hidden>
+      <strong>Then come back and tap this link again</strong> once Tapestry is installed —
+      that’s what lands you in your chat with everything waiting.
     </p>
 
-    <p class="note" id="note" hidden>
-      After you install Tapestry, come back here and tap “Open your invite in the app” —
-      you’ll land in your chat with everything waiting.
+    <p class="secondary" id="secondary" hidden>
+      Already have Tapestry? <a id="openApp" href="#">Open your invite in the app</a>
     </p>
   </main>
 
