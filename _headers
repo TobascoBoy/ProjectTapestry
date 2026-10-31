@@ -8,3 +8,10 @@
 /auth/*
   Cache-Control: no-store
   Referrer-Policy: no-referrer
+
+# Friend-invite links (/f/<code>). The code is the invite's token and the
+# sticker count changes while the invite is open: never cache, and never leak
+# the path to the App Store / TestFlight as a referrer.
+/f/*
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
