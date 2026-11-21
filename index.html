@@ -6,6 +6,7 @@
 <title>Tapestry — a scrapbook you make with your friends</title>
 <meta name="description" content="Turn anything in a photo into a scrap, trade them with friends in chats, and build a scrapbook together that lives on your home screen.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -183,6 +184,14 @@
     opacity: 0; animation: up 1.2s 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
   }
   @media (max-width: 768px) { .hero-flower { display: none; } }
+
+  /* ── SCROLL REVEALS (the portfolio site's: content rises a little and settles) ──
+     Hidden states live under html.js, so with no script or reduced motion everything shows. */
+  html.js [data-reveal] { opacity: 0; transform: translate3d(0, 1.75rem, 0); }
+  html.js [data-reveal].is-in {
+    opacity: 1; transform: none;
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1) var(--d, 0s), transform 1s cubic-bezier(0.16,1,0.3,1) var(--d, 0s);
+  }
 
   /* ── THREAD (the logo's stroke, written slowly across the page — the app's LogoSquiggle) ── */
   .thread { display: block; width: 100%; height: 96px; overflow: visible; pointer-events: none; }
@@ -1077,8 +1086,8 @@
 
 <!-- ── FEATURES HEADER ── -->
 <div class="features-header" id="features">
-  <p class="features-header__eyebrow">What's inside</p>
-  <h2 class="features-header__title">Features</h2>
+  <p class="features-header__eyebrow" data-reveal>What's inside</p>
+  <h2 class="features-header__title" data-reveal>Features</h2>
   <div class="features-header__rule"></div>
 </div>
 <!-- ── FEATURES ── -->
@@ -1217,7 +1226,7 @@
 
 <!-- ── NOSTALGIA ── -->
 <section class="nostalgia">
-  <div class="nostalgia__left">
+  <div class="nostalgia__left" data-reveal>
     <div class="nostalgia__headword">
       <h2 class="nostalgia__word">Nostalgia</h2>
       <span class="nostalgia__pos">noun &thinsp;·&thinsp; coined 1688</span>
@@ -1245,7 +1254,7 @@
       </div>
     </div>
   </div>
-  <div class="nostalgia__quote">
+  <div class="nostalgia__quote" data-reveal>
     <p class="nostalgia__quote-text">Scrapbooking is about taking nostalgia, the emotions you feel, and the memories you have, and processing them artistically. It’s important to process your past; in a way, it can help ground you in the present.</p>
   </div>
 </section>
@@ -1254,14 +1263,14 @@
 <!-- ── MISSION ── -->
 <section class="mission" id="mission">
   <div class="mission-inner">
-    <p class="mission-eyebrow">Our Mission</p>
-    <h2 class="mission-title">Restoring the art<br>of the scrapbook.</h2>
+    <p class="mission-eyebrow" data-reveal>Our Mission</p>
+    <h2 class="mission-title" data-reveal>Restoring the art<br>of the scrapbook.</h2>
     <div class="mission-collage">
-      <div class="mission-text">
+      <div class="mission-text" data-reveal>
         <p class="mission-body">Tapestry is restoring and refreshing the tradition of scrapbooking in the digital age with a collaborative touch. Scrapbooking has been a part of American history since its inception. People like Abraham Lincoln and Mark Twain were passionate scrapbookers. It has persisted as a hallmark of creative minds and individual thinkers for hundreds of years.</p>
         <p class="mission-body" style="margin-top:28px;">A nearly forgotten art: the dawn of the iPhone and the full digitalization of photos has left the art of stitching your photos into breathing memories by the wayside. While many still scrapbook, the number of photos at your fingertips to weave together has been significantly diminished. Tapestry seeks to help us tap into our massive libraries of digital photos and unpack their true value.</p>
       </div>
-      <div class="mission-figures">
+      <div class="mission-figures" data-reveal>
         <div class="mission-figure">
           <img src="lincoln.png" alt="Abraham Lincoln" class="mission-cutout" style="transform:rotate(-3deg);">
           <p class="mission-figure__name">Abraham Lincoln</p>
@@ -1280,10 +1289,10 @@
 <section class="beta" id="beta">
   <div>
     <span class="beta__eyebrow">Beta testing has begun</span>
-    <h2 class="beta__title">Early access<br>is here.</h2>
-    <p class="beta__body">Tapestry is in beta on iPhone, and we are getting it ready for the App Store. If you want early access — fill out the form below.</p>
+    <h2 class="beta__title" data-reveal>Early access<br>is here.</h2>
+    <p class="beta__body" data-reveal>Tapestry is in beta on iPhone, and we are getting it ready for the App Store. If you want early access — fill out the form below.</p>
   </div>
-  <div class="beta__cta-wrap">
+  <div class="beta__cta-wrap" data-reveal>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScWej37ULs51cvMp8Ezd_eV-pLSxRLy2GD0bG3RXCMzwitYYQ/viewform?usp=publish-editor" target="_blank" rel="noopener" class="beta__cta">Fill out the form &thinsp;→</a>
     <span class="beta__note">takes less than 2 minutes</span>
   </div>
@@ -1299,19 +1308,19 @@
   <img src="camping.png" alt="" class="note__photo note__photo--camping">
   <div class="note__inner">
     <span class="note__eyebrow">A note from Luke</span>
-    <div class="note__body">
+    <div class="note__body" data-reveal>
       <p>I am a very nostalgic person, and I often get trapped in my dreams of the past: a song that I used to play all the time or an unforgettable camping trip. I loop myself back over and over again in my head. Tapestry is a project near and dear to my heart because I see it as a way to help process my nostalgia and ground myself in the present.</p>
       <p>I think that a lot of people in my generation feel the same way. I see my generation as being in a crisis of identity. We are trapped in a rapidly changing world, stuck dreaming about our past, while looking towards the future with uncertainty. Tapestry is intended to be a therapeutic way to take nostalgia from our past and weave it into a memory in our present. It allows us to come together and see the way our friends reflect on the same world.</p>
       <p>I hope that my passion project can bring as much joy to you as it has brought to me!</p>
     </div>
-    <div class="note__sig">
+    <div class="note__sig" data-reveal>
       <div class="note__sig-rule"></div>
       <span class="note__sig-name">Luke Hattrup</span>
     </div>
   </div>
 </section>
 
-<footer class="site-footer">
+<footer class="site-footer" data-reveal>
   <img class="site-footer__mark" src="logo-mark.png" alt="Tapestry">
   <a href="/terms">Terms of Service</a>
   <a href="/privacy">Privacy Policy</a>
@@ -1320,6 +1329,7 @@
   <a href="/support">Support</a>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script>
   // ── PHOTO CONFIG ── swap src strings to add your background-removed photos (PNG with transparency)
   const TAPESTRY_PHOTOS = [
@@ -1650,6 +1660,52 @@
       });
     });
     threads.forEach(t => io.observe(t));
+  })();
+
+  // Scroll feel — the portfolio site's motion layer: Lenis smooth scrolling (the page glides
+  // and settles after the wheel stops) and content that rises into place as it arrives.
+  // Progressive: with reduced motion, or if Lenis fails to load, scrolling is the browser's.
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.documentElement.classList.add('js');
+    const els = document.querySelectorAll('[data-reveal]');
+    const showAll = () => els.forEach(el => el.classList.add('is-in'));
+    window.addEventListener('error', showAll);          // a fault must never leave content hidden
+    try {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const sibs = Array.from(el.parentElement.children).filter(n => n.hasAttribute('data-reveal'));
+          el.style.setProperty('--d', (Math.max(0, sibs.indexOf(el)) * 0.07) + 's');
+          el.classList.add('is-in');
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+      els.forEach(el => io.observe(el));
+    } catch (e) { showAll(); }
+
+    if (window.Lenis) {
+      const lenis = new window.Lenis({ duration: 1.05, smoothWheel: true });
+      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+      // the top bar's in-page links glide instead of jumping
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: -40 });
+        });
+      });
+      // the page holds still under the contact card
+      // (the card's markup comes after this script, so wait for the whole page)
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('contactModal');
+        if (!modal) return;
+        new MutationObserver(() => modal.classList.contains('open') ? lenis.stop() : lenis.start())
+          .observe(modal, { attributes: true, attributeFilter: ['class'] });
+      });
+    }
   })();
 </script>
 
