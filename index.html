@@ -197,40 +197,9 @@
   .thread { display: block; width: 100%; height: 96px; overflow: visible; pointer-events: none; }
   .thread path { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ── CHAT DEMO (a scrap getting a gold star, drawn in the phone) ── */
-  .chatdemo { position: absolute; inset: 0; background: #000; overflow: hidden; }
-  .chatdemo__inner {
-    position: absolute; left: 0; top: 0; width: 252px; height: 555px;
-    transform-origin: 0 0; transform: scale(var(--s, 1));
-    font-family: -apple-system, 'Helvetica Neue', 'Montserrat', sans-serif; color: #fff;
-  }
-  .chatdemo__inner img { position: absolute; object-fit: contain; width: auto; height: auto; }
-  .cd-nav { position: absolute; top: 46px; left: 0; right: 0; height: 30px; }
-  .cd-chev { position: absolute; left: 16px; top: 9px; width: 9px; height: 9px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); }
-  .cd-title { position: absolute; left: 0; right: 0; top: 5px; text-align: center; font-size: 14px; font-weight: 600; }
-  .cd-dots { position: absolute; right: 62px; top: 4px; font-size: 14px; color: #2f8fff; letter-spacing: 1px; }
-  .cd-start { position: absolute; right: 12px; top: 4px; background: #fff; color: #000; font-size: 10px; font-weight: 600; padding: 5px 10px; border-radius: 12px; }
-  .cd-pile { position: absolute; right: 16px; top: 88px; width: 42px; height: 42px; }
-  .cd-pile img { left: 0; top: 0; width: 42px !important; height: 42px !important; }
-  .cd-pilelabel { position: absolute; right: 16px; top: 133px; width: 42px; text-align: center; font-size: 8px; color: #8e8e93; }
-  .cd-tally { position: absolute; left: 16px; top: 96px; font-size: 9px; color: #8e8e93; line-height: 1.5; }
-  .cd-tally b { color: #fff; font-size: 15px; font-weight: 600; margin-right: 3px; }
-  .cd-bubble { position: absolute; width: 96px; height: 96px; }
-  .cd-bubble img { left: 0; top: 0; width: 96px !important; height: 96px !important; }
-  .cd-cap { position: absolute; font-size: 8px; color: #8e8e93; }
-  .cd-badge {
-    position: absolute; left: -6px; top: -6px; width: 22px; height: 22px; border-radius: 50%;
-    background: #1c1c1e; color: #fac233; font-size: 13px; line-height: 22px; text-align: center;
-    text-shadow: 0 0 5px rgba(250,194,51,0.6); opacity: 0;
-  }
-  .cd-touch { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: rgba(255,255,255,0.4); opacity: 0; }
-  .cd-ring { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; border: 3px solid rgba(250,194,51,0.9); opacity: 0; }
-  .cd-star { position: absolute; color: #fac233; text-shadow: 0 0 6px rgba(250,194,51,0.55); line-height: 1; }
-  .cd-fx { position: absolute; inset: 0; pointer-events: none; }
-  .cd-composer { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; }
-  .cd-smiley { position: absolute; left: 12px; top: 6px; width: 30px; height: 30px; border-radius: 50%; background: #1c1c1e; font-size: 16px; line-height: 30px; text-align: center; }
-  .cd-strip img { top: 6px; width: 30px !important; height: 30px !important; }
-  .cd-field { position: absolute; left: 12px; right: 12px; top: 46px; height: 30px; border-radius: 15px; background: rgba(120,120,128,0.28); font-size: 11px; line-height: 30px; padding-left: 12px; color: #8e8e93; }
+  /* ── CLIPS (screen recordings in the phones) ── */
+  /* The strip hides the recording's own status bar (clock, red recording dot). */
+  .clip-bar { position: absolute; left: 0; right: 0; top: 0; height: 9.4%; background: #000; }
 
   /* ── STACK SHOWCASE (the app's empty-chat animation) ── */
   .stack-show {
@@ -1020,7 +989,10 @@
       <div class="phone-shell">
         <div class="phone-island"></div>
         <div class="phone-screen">
-          <img src="screens/bank.jpg" alt="Your scraps, the collection of everything you have cut out">
+          <video class="clip" muted loop playsinline webkit-playsinline preload="auto" poster="clips/hero.jpg" aria-label="Tapestry in use: a photo cut out into a scrap, a gold star in a chat, a tile being arranged and added to a Tapestry">
+            <source src="clips/hero.mp4" type="video/mp4">
+          </video>
+          <span class="clip-bar"></span>
         </div>
       </div>
       <div class="btn-right"></div>
@@ -1097,7 +1069,10 @@
       <div class="phone-shell">
         <div class="phone-island"></div>
         <div class="phone-screen">
-          <img src="screens/make.jpg" alt="Cutting a guitarist out of a photo">
+          <video class="clip" muted loop playsinline webkit-playsinline preload="metadata" poster="clips/scraps.jpg" aria-label="A photo being cut out, outlined, fused with another scrap and filtered">
+            <source src="clips/scraps.mp4" type="video/mp4">
+          </video>
+          <span class="clip-bar"></span>
         </div>
       </div>
       <div class="btn-right"></div>
@@ -1122,26 +1097,10 @@
       <div class="phone-shell">
         <div class="phone-island"></div>
         <div class="phone-screen">
-          <div class="chatdemo" id="chatDemo" role="img" aria-label="A chat where a scrap is given a gold star and collected into the stack">
-            <div class="chatdemo__inner">
-              <div class="cd-nav"><span class="cd-chev"></span><span class="cd-title">Sam</span><span class="cd-dots">•••</span><span class="cd-start">Start</span></div>
-              <div class="cd-tally"><div><b id="cdCollected">2</b>collected</div><div><b id="cdStarred">1</b>starred</div></div>
-              <div class="cd-pile" id="cdPile"></div>
-              <div class="cd-pilelabel">Stack</div>
-              <div class="cd-bubble" id="cdMine" style="right:16px; top:168px;"><img src="scraps/s3.png" alt=""></div>
-              <div class="cd-cap" style="right:16px; top:268px;">Sent · Read</div>
-              <div class="cd-bubble" id="cdTheirs" style="left:18px; top:300px; opacity:0;"><img id="cdTheirsImg" src="scraps/s5.png" alt=""><span class="cd-badge" id="cdBadge">★</span></div>
-              <div class="cd-cap" id="cdCap" style="left:18px; top:402px; opacity:0;">Collected</div>
-              <div class="cd-composer">
-                <span class="cd-smiley">☺</span>
-                <div class="cd-strip">
-                  <img src="scraps/s2.png" alt="" style="left:52px;"><img src="scraps/s7.png" alt="" style="left:90px;"><img src="scraps/s4.png" alt="" style="left:128px;"><img src="scraps/s1.png" alt="" style="left:166px;"><img src="scraps/s6.png" alt="" style="left:204px;">
-                </div>
-                <div class="cd-field">Message</div>
-              </div>
-              <div class="cd-fx" id="cdFx"><span class="cd-touch" id="cdTouch"></span><span class="cd-ring" id="cdRing"></span></div>
-            </div>
-          </div>
+          <video class="clip" muted loop playsinline webkit-playsinline preload="metadata" poster="clips/star.jpg" aria-label="A scrap in a chat being given a gold star">
+            <source src="clips/star.mp4" type="video/mp4">
+          </video>
+          <span class="clip-bar"></span>
         </div>
       </div>
       <div class="btn-right"></div>
@@ -1177,7 +1136,10 @@
       <div class="phone-shell">
         <div class="phone-island"></div>
         <div class="phone-screen">
-          <img src="screens/tapestry.jpg" alt="A Tapestry of four collages">
+          <video class="clip" muted loop playsinline webkit-playsinline preload="metadata" poster="clips/tile.jpg" aria-label="Scraps from a chat being arranged into a tile and added to a Tapestry">
+            <source src="clips/tile.mp4" type="video/mp4">
+          </video>
+          <span class="clip-bar"></span>
         </div>
       </div>
       <div class="btn-right"></div>
@@ -1511,108 +1473,19 @@
     }, { threshold: 0.2 }).observe(stage);
   })();
 
-  // Chat demo — a scrap arrives, is held, and gets a gold star: the burst, copies and stars
-  // rising, a copy flying to the stack (StackKeepAnimation.swift's beats, redrawn).
+  // Clips — each recording plays only while its phone is on screen, from the start.
   (function () {
-    const demo = document.getElementById('chatDemo');
-    if (!demo || !demo.animate) return;
-    const inner = demo.querySelector('.chatdemo__inner');
-    const fit = () => inner.style.setProperty('--s', demo.clientWidth / 252);
-    fit(); window.addEventListener('resize', fit);
-    const $ = (id) => document.getElementById(id);
-    const theirs = $('cdTheirs'), img = $('cdTheirsImg'), badge = $('cdBadge'), cap = $('cdCap'),
-          pile = $('cdPile'), fx = $('cdFx'), touch = $('cdTouch'), ring = $('cdRing'),
-          nCollected = $('cdCollected'), nStarred = $('cdStarred');
-    const ARRIVALS = ['scraps/s5.png', 'scraps/s8.png', 'scraps/s6.png'];
-    const SPRING = 'cubic-bezier(0.34, 1.6, 0.64, 1)';
-    const C = { x: 66, y: 348 }, P = { x: 215, y: 109 };       // the scrap's centre, the pile's
-    let run = 0, round = 0;
-    const sleep = (s) => new Promise(r => setTimeout(r, s * 1000));
-    function pileFace(src, i) {
-      const el = document.createElement('img');
-      el.src = src; el.alt = '';
-      el.style.transform = `rotate(${i % 2 ? 7 : -6}deg) translate(${i % 2 ? 2 : -2}px, ${i}px)`;
-      pile.appendChild(el); return el;
-    }
-    function particle(html, cls, size, from, to, dur, delay, endScale) {
-      const el = document.createElement(html === 'img' ? 'img' : 'span');
-      if (html === 'img') { el.src = img.src; el.alt = ''; el.style.width = el.style.height = size + 'px'; }
-      else { el.textContent = '★'; el.className = cls; el.style.fontSize = size + 'px'; }
-      el.style.left = (from.x - size / 2) + 'px'; el.style.top = (from.y - size / 2) + 'px';
-      el.style.opacity = 0;
-      fx.appendChild(el);
-      el.animate([
-        { transform: 'translate(0,0) scale(0.4)', opacity: 1 },
-        { transform: `translate(${to.x - from.x}px, ${to.y - from.y}px) scale(${endScale})`, opacity: 1, offset: 0.75 },
-        { transform: `translate(${to.x - from.x}px, ${to.y - from.y - 14}px) scale(${endScale})`, opacity: 0 }
-      ], { duration: dur * 1000, delay: delay * 1000, easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)', fill: 'forwards' })
-        .onfinish = () => el.remove();
-    }
-    function reset() {
-      fx.querySelectorAll('img, .cd-star').forEach(e => e.remove());
-      pile.innerHTML = ''; pileFace('scraps/s1.png', 0); pileFace('scraps/s7.png', 1);
-      nCollected.textContent = '2'; nStarred.textContent = '1';
-      theirs.style.opacity = 0; badge.style.opacity = 0; cap.style.opacity = 0;
-    }
-    async function loop(id) {
-      const alive = () => id === run;
-      while (alive()) {
-        reset();
-        img.src = ARRIVALS[round++ % ARRIVALS.length];
-        await sleep(0.7); if (!alive()) return;
-        // the scrap arrives
-        theirs.style.opacity = 1;
-        theirs.animate([{ transform: 'scale(0.3)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 420, easing: SPRING });
-        await sleep(1.3); if (!alive()) return;
-        // the hold
-        touch.style.left = C.x + 'px'; touch.style.top = C.y + 'px';
-        touch.animate([{ opacity: 0, transform: 'scale(1.5)' }, { opacity: 1, transform: 'scale(1)', offset: 0.25 }, { opacity: 1, transform: 'scale(0.9)', offset: 0.8 }, { opacity: 0, transform: 'scale(1.3)' }], { duration: 800 });
-        theirs.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.93)', offset: 0.3 }, { transform: 'scale(0.93)', offset: 0.8 }, { transform: 'scale(1)' }], { duration: 800, easing: 'ease-out' });
-        await sleep(0.7); if (!alive()) return;
-        // the star: ring, badge, copies and gold stars rising
-        ring.style.left = C.x + 'px'; ring.style.top = C.y + 'px';
-        ring.animate([{ transform: 'scale(0.5)', opacity: 1 }, { transform: 'scale(2.4)', opacity: 0 }], { duration: 600, easing: 'ease-out' });
-        badge.style.opacity = 1;
-        badge.animate([{ transform: 'scale(0.2)' }, { transform: 'scale(1)' }], { duration: 450, easing: SPRING });
-        nStarred.textContent = '2';
-        for (let i = 0; i < 11; i++) {
-          const dx = -52 + i * 17 + (i % 3) * 6, rise = 210 + (i * 37) % 120;
-          particle('img', '', 22 + (i * 7) % 16, { x: C.x + dx * 0.25, y: C.y }, { x: C.x + dx + 20, y: C.y - rise }, 1.3 + (i % 4) * 0.2, i * 0.04, 1);
-        }
-        for (let i = 0; i < 12; i++) {
-          const dx = -60 + i * 16 - (i % 4) * 5, rise = 180 + (i * 53) % 150;
-          particle('span', 'cd-star', 10 + (i * 5) % 12, { x: C.x + dx * 0.25, y: C.y }, { x: C.x + dx + 22, y: C.y - rise }, 1.1 + (i % 5) * 0.2, i * 0.035, 1);
-        }
-        await sleep(0.35); if (!alive()) return;
-        // a copy flies to the stack and lands on top
-        const fly = document.createElement('img');
-        fly.src = img.src; fly.alt = ''; fly.style.width = fly.style.height = '96px';
-        fly.style.left = (C.x - 48) + 'px'; fly.style.top = (C.y - 48) + 'px';
-        fx.appendChild(fly);
-        const dx = P.x - C.x, dy = P.y - C.y;
-        await fly.animate([
-          { transform: 'translate(0,0) scale(1)' },
-          { transform: `translate(${dx * 0.45}px, ${dy * 0.75}px) scale(0.75)`, offset: 0.5 },
-          { transform: `translate(${dx}px, ${dy}px) scale(0.44)` }
-        ], { duration: 560, easing: 'cubic-bezier(0.3, 0, 0.15, 1)', fill: 'forwards' }).finished;
-        fly.remove(); if (!alive()) return;
-        pileFace(img.src, 2);
-        pile.animate([{ transform: 'scale(0.55)' }, { transform: 'scale(1)' }], { duration: 420, easing: SPRING });
-        nCollected.textContent = '3';
-        cap.style.opacity = 1;
-        cap.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
-        await sleep(3.2); if (!alive()) return;
-        await theirs.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350 }).finished;
-      }
-    }
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      reset(); pileFace(img.src, 2); theirs.style.opacity = 1; badge.style.opacity = 1; cap.style.opacity = 1;
-      nCollected.textContent = '3'; nStarred.textContent = '2';
-      return;
-    }
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => { run++; if (e.isIntersecting) loop(run); });
-    }, { threshold: 0.25 }).observe(demo);
+    const clips = document.querySelectorAll('video.clip');
+    if (!clips.length) return;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting && !still) { const p = v.play(); if (p) p.catch(() => {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.35 });
+    clips.forEach(v => io.observe(v));
   })();
 
   // Threads — the app's LogoSquiggle, course .line: the logo's loops (a point outside a wheel
