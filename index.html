@@ -45,6 +45,43 @@
   .nav-links { display: flex; gap: 40px; list-style: none; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; }
   .nav-links a { color: var(--ink); text-decoration: none; opacity: 0.4; transition: opacity 0.2s; }
   .nav-links a:hover { opacity: 1; }
+  .nav-menu { position: relative; }
+  .nav-menu__btn {
+    background: none; border: none; padding: 0; cursor: pointer;
+    font: inherit; letter-spacing: inherit; text-transform: inherit;
+    color: var(--ink); opacity: 0.4; transition: opacity 0.2s;
+  }
+  .nav-menu__btn:hover, .nav-menu.open .nav-menu__btn { opacity: 1; }
+  .nav-menu__list {
+    position: absolute; right: 0; top: 100%; padding-top: 14px;
+    list-style: none; min-width: 210px;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .nav-menu__list > div {
+    background: rgba(249,247,243,0.97); backdrop-filter: blur(12px);
+    border: 1px solid var(--rule); border-radius: 12px; padding: 8px 0;
+    display: flex; flex-direction: column;
+  }
+  .nav-menu__list a { display: block; padding: 10px 18px; white-space: nowrap; opacity: 0.55; }
+  .nav-menu:hover .nav-menu__list, .nav-menu:focus-within .nav-menu__list, .nav-menu.open .nav-menu__list {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  @media (max-width: 768px) {
+    nav { padding: 18px 20px; }
+    .nav-links { gap: 16px; font-size: 9px; letter-spacing: 0.16em; }
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    padding: 44px 52px 56px; display: flex; flex-wrap: wrap; gap: 14px 32px;
+    align-items: center; justify-content: center;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .site-footer a { color: var(--ink); text-decoration: none; opacity: 0.45; transition: opacity 0.2s; }
+  .site-footer a:hover { opacity: 1; }
+  .site-footer__mark { height: 18px; width: auto; opacity: 0.9; flex-basis: 100%; object-fit: contain; margin-bottom: 6px; }
+  .site-footer__copy { flex-basis: 100%; text-align: center; opacity: 0.35; letter-spacing: 0.12em; }
 
   /* ── HERO ── */
   .hero {
@@ -940,6 +977,16 @@
     <li><a href="#mission">Mission</a></li>
     <li><a href="#beta">Beta Version</a></li>
     <li><a href="#note">Note</a></li>
+    <li class="nav-menu" id="policiesMenu">
+      <button class="nav-menu__btn" aria-haspopup="true" aria-expanded="false">Policies</button>
+      <div class="nav-menu__list"><div>
+        <a href="/terms">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/guidelines">Community Guidelines</a>
+        <a href="/copyright">Copyright &amp; Removal</a>
+        <a href="/support">Support</a>
+      </div></div>
+    </li>
   </ul>
 </nav>
 
@@ -1264,6 +1311,15 @@
   </div>
 </section>
 
+<footer class="site-footer">
+  <img class="site-footer__mark" src="logo-mark.png" alt="Tapestry">
+  <a href="/terms">Terms of Service</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="/guidelines">Community Guidelines</a>
+  <a href="/copyright">Copyright &amp; Removal</a>
+  <a href="/support">Support</a>
+</footer>
+
 <script>
   // ── PHOTO CONFIG ── swap src strings to add your background-removed photos (PNG with transparency)
   const TAPESTRY_PHOTOS = [
@@ -1307,6 +1363,16 @@
   TAPESTRY_PHOTOS.slice(0, 3).forEach(p => heroPhotos.appendChild(makePhotoEl(p, 'hero')));
 
 
+
+  // Policies menu — hover opens it on a desktop; a tap toggles it on a phone.
+  (function () {
+    const menu = document.getElementById('policiesMenu'), btn = menu.querySelector('button');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btn.setAttribute('aria-expanded', menu.classList.toggle('open'));
+    });
+    document.addEventListener('click', () => { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
+  })();
 
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
