@@ -144,11 +144,12 @@
     <h1 id="title">Opening your invite…</h1>
     <p class="sub" id="subtitle">One moment.</p>
 
-    <a class="btn" id="primary" href="https://testflight.apple.com/join/SzCFn81z" hidden>Get Tapestry</a>
+    <a class="btn" id="primary" href="https://apps.apple.com/us/app/id6760596892" hidden>Get Tapestry</a>
 
     <p class="note" id="note" hidden>
-      <strong>Then come back and tap this link again</strong> once Tapestry is installed —
-      that’s what lands you in your chat with everything waiting.
+      <strong>Your invite is copied.</strong> Once Tapestry is installed and you’ve signed up,
+      tap <strong>Paste</strong> when it asks if a friend invited you. Or come back and tap
+      this link again.
     </p>
 
     <p class="secondary" id="secondary" hidden>
@@ -167,7 +168,7 @@
       // name and a count, never a picture (ONBOARDING_PLAN.md §5.2).
       var SUPABASE_URL = "https://jrdikjncaxdzxmxcddjv.supabase.co";
       var SUPABASE_KEY = "sb_publishable_I0bLlOuMPBw81zWPyI5RuQ_zM7WC1LN";
-      var STORE_URL    = "https://testflight.apple.com/join/SzCFn81z";
+      var STORE_URL    = "https://apps.apple.com/us/app/id6760596892";
 
       var els = {
         title:     document.getElementById("title"),
@@ -230,8 +231,8 @@
         if (n > 0) els.count.textContent = String(n);
         show(name + " wants to make a stack and curate a scrapbook with you on Tapestry.",
              n === 0 ? "A chat is waiting for you."
-             : n === 1 ? "1 sticker is already waiting for you."
-             : n + " stickers are already waiting for you.");
+             : n === 1 ? "1 scrap is already waiting for you."
+             : n + " scraps are already waiting for you.");
         offerApp();
       }).catch(function (err) {
         if (err && err.message === "throttled") {
@@ -242,6 +243,21 @@
       });
 
       els.primary.href = STORE_URL;
+
+      // CARRY THE INVITE THROUGH THE INSTALL (2026-11-27). A link cannot follow someone into
+      // an app they do not have yet, so the tap that sends them to the App Store also copies
+      // this invite's link; the app asks a new account "Did a friend invite you?" with a Paste
+      // button. Best effort — a browser that refuses the copy still goes to the store, and
+      // tapping the link again after installing still works.
+      els.primary.addEventListener("click", function () {
+        if (!looksLikeCode) return;
+        var link = "https://jointhetapestry.com/f/" + code;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).catch(function () {});
+          }
+        } catch (e) {}
+      });
     })();
   </script>
 </body>
